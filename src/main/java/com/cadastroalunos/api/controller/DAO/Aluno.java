@@ -2,20 +2,34 @@ package com.cadastroalunos.api.controller.DAO;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 
 
 public class Aluno {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(name = "Nome")
 	private String nome;
+	@Column(name = "Cel")
 	private String telefone;
+	@Column(unique = true,name = "Email")
 	private String email;
+	@Column(name = "Data_Nasc")
 	private LocalDate data_nascimento;
+	@Column(name = "Senha")
 	private String senha;
 
 	
 	public Aluno() {
 		
 	}
+	
 	public String getNome() {
 		return nome;
 	}
