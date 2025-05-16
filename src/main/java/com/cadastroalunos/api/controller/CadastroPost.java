@@ -1,32 +1,30 @@
 package com.cadastroalunos.api.controller;
 
 
-import java.time.LocalDate;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cadastroalunos.api.alunoRepository.AlunoRepository;
 import com.cadastroalunos.api.controller.DAO.Aluno;
 
 @RestController
 public class CadastroPost {
 	
+	
+	@Autowired
+	private AlunoRepository alunoRepo;
+	
 	@PostMapping("/cadastro")
-	public String cadastro(@RequestBody Aluno aluno) {
-		String nome = aluno.getNome();
-		String telefone = aluno.getTelefone();
-		String email = aluno.getEmail();
-		LocalDate data_nascimento = aluno.getData_nascimento();
-		String senha = aluno.getSenha();
-		
-		return "Aluno cadastrado: " + nome 
-	               + ", Telefone: " + telefone
-	               + ", Email: " + email
-	               + ", Data de Nascimento: " + data_nascimento
-	               + ", Senha: " + senha;
-		
-		
-		
+	public ResponseEntity<Aluno> cadastro(@RequestBody Aluno aluno) {
+		Aluno alunoSalvo = alunoRepo.save(aluno);
+		return new ResponseEntity<>(alunoSalvo, HttpStatus.CREATED);
+	
 		
 	}
 	
