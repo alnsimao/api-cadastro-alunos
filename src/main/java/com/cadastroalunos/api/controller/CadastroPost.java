@@ -23,6 +23,7 @@ public class CadastroPost {
 	@PostMapping("/cadastro")
 	public ResponseEntity<Aluno> cadastro(@RequestBody Aluno aluno) {
 		Aluno alunoSalvo = alunoRepo.save(aluno);
+		System.out.println("ID gerado (no servidor): " + alunoSalvo.getId());
 		return new ResponseEntity<>(alunoSalvo, HttpStatus.CREATED);
 	
 		
