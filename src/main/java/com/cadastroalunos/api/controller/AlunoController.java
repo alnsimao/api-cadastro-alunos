@@ -17,13 +17,13 @@ import com.cadastroalunos.api.alunoRepository.AlunoRepository;
 import com.cadastroalunos.api.controller.DAO.Aluno;
 
 @RestController
-public class CadastroPost {
+public class AlunoController {
 	
 	
 	@Autowired
 	private AlunoRepository alunoRepo;
 	
-	@PostMapping("/cadastro")
+	@PostMapping("/alunos")
 	public ResponseEntity<Aluno> cadastro(@RequestBody Aluno aluno) {
 		Aluno alunoSalvo = alunoRepo.save(aluno);
 		return new ResponseEntity<>(alunoSalvo, HttpStatus.CREATED);
@@ -31,12 +31,11 @@ public class CadastroPost {
 		
 	}
 	
-	@GetMapping("/ListaDeAluno")
+	@GetMapping("/alunos")
 	public List<Aluno> listaDeAluno() {
 		List<Aluno> alunos = alunoRepo.findAll();
 		return alunos;
 	}
-	
 	
 
 	
