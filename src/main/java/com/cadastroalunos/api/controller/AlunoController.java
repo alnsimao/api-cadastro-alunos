@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,9 +62,31 @@ public class AlunoController {
 			
 			return ResponseEntity.ok(alunoExistente);
 		} else {
-			return ResponseEntity.notFound().build();		}
-	
+			return ResponseEntity.notFound().build();		
+		}
 	}
+	
+	@PutMapping("/alunos/{id}")
+	public ResponseEntity<Aluno> alterarDados(@PathVariable String id, @RequestBody Aluno aluno){
+		System.out.println("TESTE PARA VERIFICAR SE ESTÁ RODANDO O ID: "+id);
+		Optional<Aluno> alunoOP = alunoRepo.findById(Long.parseLong(id));
+		if(alunoOP.isPresent()) {
+			Aluno alunoEx = alunoOP.get();
+			alunoEx.setNome(aluno.getNome());
+			alunoEx.setEmail(aluno.getEmail());
+			alunoEx.setData_nascimento(aluno.getData_nascimento());
+			alunoEx.setTelefone(aluno.getTelefone());
+			
+			alunoRepo.save(alunoEx);
+			
+			return ResponseEntity.ok(alunoEx);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+		
+
+}
+	
 	
 
 }
