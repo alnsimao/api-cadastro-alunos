@@ -1,0 +1,33 @@
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: banco_escola
+    environment:
+      MYSQL_DATABASE: escola
+      MYSQL_ROOT_PASSWORD: alan1405@
+      MYSQL_USER: root
+      MYSQL_PASSWORD: alan1405@
+    ports:
+      - "3306:3306"
+    networks:
+      - rede-escola
+
+
+  api:
+    build: .
+    container_name: api_escola
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/escola?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: alan1405@
+    ports:
+      - "8080:8080"
+    networks:
+      - rede-escola
+    restart: on-failure
+
+networks:
+  rede-escola:
