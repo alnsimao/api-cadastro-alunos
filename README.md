@@ -8,7 +8,7 @@ O objetivo é praticar conceitos de **CRUD, autenticação, segurança com cript
 ---
 
 ## 🚀 Tecnologias utilizadas
-- **Java 17+**
+- **Java 21+**
 - **Spring Boot**
 - **Spring Data JPA / Hibernate**
 - **PostgreSQL / MySQL**
