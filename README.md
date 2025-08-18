@@ -35,6 +35,6 @@ O objetivo é praticar conceitos de **CRUD, autenticação, segurança com cript
 
 ### 🔹 Localmente (Maven)
 ```bash
-git clone https://github.com/seu-usuario/cadastro-alunos.git
+git clone https://github.com/alnsimao/api-cadastro-alunos.git
 cd cadastro-alunos
 ./mvnw spring-boot:run
