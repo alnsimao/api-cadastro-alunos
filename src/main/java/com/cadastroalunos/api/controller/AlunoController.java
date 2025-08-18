@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,10 +84,19 @@ public class AlunoController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
-		
-
+		}
+	@DeleteMapping("/alunos/{id}")
+	public ResponseEntity<Void> deletarAluno(@PathVariable String id){
+		Optional<Aluno> alunoOP1 = alunoRepo.findById(Long.parseLong(id));
+		if(alunoOP1.isPresent()) {
+			alunoRepo.delete(alunoOP1.get());
+			return ResponseEntity.ok().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}	
+	}		
 }
 	
 	
 
-}
+
